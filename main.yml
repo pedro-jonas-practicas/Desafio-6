@@ -18,18 +18,9 @@
     - name: Configuracion del sitio apache y Activacion del nuevo sitio
       include_tasks: includes/config-and-activate.yml
     - name: Deshabilita el sitio default
-      command: a2dissite 000-default.conf
-      notify:
-        - Reload Apache
-      when: is_ubuntu
+      include_tasks: includes/disable.yml
     - name: Cambiar el e-mail del webmaster
-      lineinfile:
-        path: /etc/apache2/sites-available/000-default.conf
-        regexp: 'ServerAdmin webmaster@localhost'
-        line: '	ServerAdmin webmaster@educacionit.com'
-      when: is_ubuntu
-      notify:
-      - Reload Apache
+      include_tasks: includes/change-webmaster.yml
   handlers:
     - name: Reload Apache
       service:
