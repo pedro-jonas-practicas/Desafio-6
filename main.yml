@@ -12,12 +12,7 @@
     - name: Instalar servicio Apache
       include_tasks: includes/install-apache2.yml
     - name: crear directorio para el sitio
-      file:
-        path: "{{ site_dir }}"
-        state: directory
-        owner: www-data
-        group: www-data
-      when: is_ubuntu
+      include_tasks: includes/create-directory.yml
     - name: copiar index.html al directorio del sitio
       include_tasks: includes/copy-index.yml
     - name: Configuracion del sitio apache
