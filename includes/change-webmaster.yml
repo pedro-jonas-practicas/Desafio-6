@@ -2,7 +2,7 @@
   lineinfile:
     path: /etc/apache2/sites-available/000-default.conf
     regexp: 'ServerAdmin webmaster@localhost'
-    line: '	ServerAdmin webmaster@educacionit.com'
+    line: '	ServerAdmin webmaster@desafio6.bootcamp.com'
   when: is_ubuntu
   notify:
   - Reload Apache
