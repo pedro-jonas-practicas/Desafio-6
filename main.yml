@@ -15,18 +15,8 @@
       include_tasks: includes/create-directory.yml
     - name: copiar index.html al directorio del sitio
       include_tasks: includes/copy-index.yml
-    - name: Configuracion del sitio apache
-      template:
-        src: templates/ansible_site.conf.j2
-        dest: /etc/apache2/sites-available/ansible_site.conf
-      notify:
-        - Reload Apache
-      when: is_ubuntu
-    - name: Activa el nuevo sitio
-      command: a2ensite ansible_site.conf
-      notify:
-        - Reload Apache
-      when: is_ubuntu
+    - name: Configuracion del sitio apache y Activacion del nuevo sitio
+      include_tasks: includes/config-and-activate.yml
     - name: Deshabilita el sitio default
       command: a2dissite 000-default.conf
       notify:
